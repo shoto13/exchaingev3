@@ -51,6 +51,8 @@ public class signup extends AppCompatActivity {
                 String txt_username = username.getText().toString();
                 String txt_email = emailEditText.getText().toString();
                 String txt_password = passwordEditText.getText().toString();
+                String txt_firstName = firstNameEditText.getText().toString();
+                String txt_secondName = secondNameEditText.getText().toString();
 
                 //CHECK IF FIELDS ARE EMPTY (ADD ADDITIONAL FIELDS)
                 if(TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
@@ -58,7 +60,7 @@ public class signup extends AppCompatActivity {
                 } else if (txt_password.length() < 6) {
                     Toast.makeText(signup.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(txt_username, txt_email, txt_password);
+                    register(txt_username, txt_email, txt_password, txt_firstName, txt_secondName);
                 }
             }
         });
@@ -66,7 +68,7 @@ public class signup extends AppCompatActivity {
     }
 
     //REGISTER A NEW USER USING FIREBASE
-    private void register(String username, String email, String password) {
+    private void register(String username, String email, String password, String firstName, String secondName) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -82,6 +84,8 @@ public class signup extends AppCompatActivity {
                             hashMap.put("id", userid);
                             hashMap.put("username", username);
                             hashMap.put("imageURL", "default");
+                            hashMap.put("firstName", firstName);
+                            hashMap.put("secondName", secondName);
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
