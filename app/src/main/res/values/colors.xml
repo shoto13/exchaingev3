@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- MY CUSTOM COLOURS -->
+
+    <!-- ICE CREAM COLOR SCHEME -->
+    <color name="Cherry_IC">#BB63A6</color>
+    <color name="Raspberry_IC">#D66BA0</color>
+    <color name="Papaya_IC">#e8b0b0</color>
+    <color name="Banana_IC">#EBCE84</color>
+    <color name="Bubblegum_IC">#9df7e5</color>
+
+    <!-- DEEP FOREST COLOR SCHEME -->
+    <color name="Stream_DF">#648C90</color>
+    <color name="Pine_DF">#35392D</color>
+    <color name="Moss_DF">#7C896C</color>
+    <color name="Foliage_DF">#8DAB7F</color>
+    <color name="Shoots_DF">#C3EA86</color>
+
+    <color name="seablue">#045AA6</color>
+    <color name="seablueaccent">#0461B4</color>
+
+    <color name="offwhitetext">#F7F7F7</color>
+    <color name="lightgrey">#ebeae5</color>
+    <color name="greenone">#13EBA2</color>
+    <color name="greentwo">#05AC72</color>
+    <color name="greenthree">#056644</color>
+    <color name="greenfour">#3DEC55</color>
+    <color name="furtherfromwhite">#e6e6e6</color>
+
+    <color name="darkgrey">#45484B</color>
+    <color name="hintcolor">#707070</color>
+    <color name="mediumGreyOne">#cccccc</color>
+    <color name="softWarn">#ffb347</color>
+
+
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "954611611862",
+    "project_id": "exchainge-db047",
+    "storage_bucket": "exchainge-db047.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954611611862:android:d4d4255906034fa857f177",
+        "android_client_info": {
+          "package_name": "com.journey13.exchainge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954611611862-ug8u00jgfsacgdj7ne72tosiu4kdbto4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-bArZKu3QAvo-jrBpXNEqy6Gqeu1pLyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954611611862-ug8u00jgfsacgdj7ne72tosiu4kdbto4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
