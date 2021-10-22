@@ -58,7 +58,6 @@
         android:layout_marginTop="40dp"
         android:text="Log in"
         tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="399dp"
-        android:onClick="goToHome"/>
+        tools:layout_editor_absoluteY="399dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

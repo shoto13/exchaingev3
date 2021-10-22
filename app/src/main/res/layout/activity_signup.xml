@@ -84,11 +84,10 @@
         app:layout_constraintTop_toBottomOf="@id/emailEditText" />
 
     <Button
-        android:id="@+id/signupButton"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
-        android:onClick="go2Home"
         android:text="Sign up"
         app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintLeft_toLeftOf="parent"
