@@ -27,7 +27,7 @@
                 />
 
             <TextView
-                android:layout_width="30dp"
+                android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:id="@+id/username"
                 android:text="username"
