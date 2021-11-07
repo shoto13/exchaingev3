@@ -39,7 +39,8 @@
                 android:layout_marginTop="15dp"
                 android:textColor="@color/Papaya_IC"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"/>
 
 
 
