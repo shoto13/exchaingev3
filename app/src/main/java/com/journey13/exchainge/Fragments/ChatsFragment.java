@@ -84,6 +84,7 @@ public class ChatsFragment extends Fragment {
 
     private void readChats() {
         mUsers = new ArrayList<>();
+        List<User> internalMusers = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
 
@@ -99,8 +100,9 @@ public class ChatsFragment extends Fragment {
                     for (String id : usersList) {
                         if (user.getId().equals(id)) {
                             if (mUsers.size() != 0) {
+
                                 for (User user1 : mUsers) {
-                                    if (!user.getId().equals(user1.getId())) {
+                                    if (!user.getId().equals(user1.getId()) && !mUsers.contains(user)) {
                                         mUsers.add(user);
                                     }
                                 }
@@ -110,7 +112,7 @@ public class ChatsFragment extends Fragment {
                         }
                     }
                 }
-                userAdapter = new UserAdapter(getContext(), mUsers);
+                userAdapter = new UserAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
 
