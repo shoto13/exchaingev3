@@ -78,14 +78,15 @@ public class MainActivity extends AppCompatActivity {
 
                 if (firebaseUser != null) {
                     User user = dataSnapshot.getValue(User.class);
+
                     username.setText(user.getUsername());
-                    if (user.getImageURL().equals("default")) {
-                        profilePic.setImageResource(R.mipmap.ic_launcher);
-                    } else {
 
-
-                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
-                    }
+//                    if (user.getImageURL().equals("default")) {
+//                        profilePic.setImageResource(R.mipmap.ic_launcher);
+//                    } else {
+//
+//                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
+//                    }
                 }
 
             }

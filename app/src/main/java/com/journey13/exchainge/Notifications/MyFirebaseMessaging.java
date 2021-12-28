@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,9 +37,45 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         if (firebaseUser != null && sentMessage.equals(firebaseUser.getUid())) {
             if (!currentUser.equals(user)) {
-                sendNotification(remoteMessage);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    sendOreoNotification(remoteMessage);
+                } else {
+                    sendNotification(remoteMessage);
+                }
             }
         }
+    }
+
+    private void sendOreoNotification (RemoteMessage remoteMessage) {
+
+        String user = remoteMessage.getData().get("users");
+        String icon = remoteMessage.getData().get("icon");
+        String title = remoteMessage.getData().get("title");
+        String body = remoteMessage.getData().get("body");
+
+        RemoteMessage.Notification notification = remoteMessage.getNotification();
+        int j = Integer.parseInt(user.replaceAll("[\\D]", ""));
+        Intent intent = new Intent(this, MessageActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("userid", user);
+        intent.putExtras(bundle);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, j, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        OreoNotification oreoNotification = new OreoNotification(this);
+        Notification.Builder builder = oreoNotification.getOreoNotification(title, body, pendingIntent, defaultSound, icon);
+
+        int i = 0;
+        if (j > 0) {
+            i = j;
+        }
+
+        oreoNotification.getManager().notify(i, builder.build());
+
+
     }
 
     private void sendNotification(RemoteMessage remoteMessage) {
