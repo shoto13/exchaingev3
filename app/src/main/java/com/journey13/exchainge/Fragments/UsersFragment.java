@@ -104,9 +104,6 @@ public class UsersFragment extends Fragment {
         });
     }
 
-
-
-
     //FIREBASE USER READ FROM DB
     private void readUsers() {
 

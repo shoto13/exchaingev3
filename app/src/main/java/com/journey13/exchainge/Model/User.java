@@ -7,13 +7,15 @@ public class User {
     private String imageURL;
     private String status;
     private String search;
+    private Boolean searchable;
 
-    public User(String id, String username, String imageURL, String status, String search) {
+    public User(String id, String username, String imageURL, String status, String search, Boolean searchable) {
         this.id = id;
         this.username = username;
         this.imageURL = imageURL;
         this.status = status;
         this.search = search;
+        this.searchable = searchable;
 
     }
 
@@ -59,5 +61,13 @@ public class User {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public Boolean getSearchable() {
+        return searchable;
+    }
+
+    public void setSearchable(Boolean searchable) {
+        this.searchable = searchable;
     }
 }
