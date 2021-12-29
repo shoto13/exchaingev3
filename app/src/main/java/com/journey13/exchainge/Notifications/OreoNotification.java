@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 
 public class OreoNotification extends ContextWrapper {
+
     private static final String CHANNEL_ID = "com.journey13.exchainge";
     private static final String CHANNEL_NAME = "exchainge";
 
@@ -19,7 +20,7 @@ public class OreoNotification extends ContextWrapper {
     public OreoNotification(Context base) {
         super(base);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
     }
@@ -35,9 +36,10 @@ public class OreoNotification extends ContextWrapper {
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
         getManager().createNotificationChannel(channel);
+
     }
 
-    public NotificationManager getManager(){
+    public NotificationManager getManager() {
         if (notificationManager == null) {
             notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         }

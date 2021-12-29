@@ -7,15 +7,18 @@ public class User {
     private String imageURL;
     private String status;
     private String search;
-    private Boolean searchable;
+    private String firstName;
+    private String secondName;
 
-    public User(String id, String username, String imageURL, String status, String search, Boolean searchable) {
+
+    public User(String id, String username, String imageURL, String status, String search, String firstName, String secondName) {
         this.id = id;
         this.username = username;
         this.imageURL = imageURL;
         this.status = status;
         this.search = search;
-        this.searchable = searchable;
+        this.firstName = firstName;
+        this.secondName = secondName;
 
     }
 
@@ -63,11 +66,20 @@ public class User {
         this.search = search;
     }
 
-    public Boolean getSearchable() {
-        return searchable;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setSearchable(Boolean searchable) {
-        this.searchable = searchable;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
 }
