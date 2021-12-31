@@ -81,12 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
                     username.setText(user.getUsername());
 
-//                    if (user.getImageURL().equals("default")) {
-//                        profilePic.setImageResource(R.mipmap.ic_launcher);
-//                    } else {
-//
-//                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
-//                    }
+                    if (user.getImageURL().equals("default")) {
+                        profilePic.setImageResource(R.mipmap.ic_launcher);
+                    } else {
+                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
+                    }
                 }
 
             }
