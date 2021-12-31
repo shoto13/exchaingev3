@@ -16,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +38,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.journey13.exchainge.MainActivity;
 import com.journey13.exchainge.Model.User;
+import com.journey13.exchainge.MyListAdapter;
 import com.journey13.exchainge.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -55,17 +62,50 @@ public class ProfileFragment extends Fragment {
     private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageTask uploadTask;
-
-
+    private ListView optionsList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        image_profile = view.findViewById(R.id.profile_image);
-        username = view.findViewById(R.id.username);
+        image_profile = rootView.findViewById(R.id.profile_image);
+        username = rootView.findViewById(R.id.username);
+        //SETTINGS AND OPTIONS
+
+        String[] listItemHeads = {"Username", "Tag line", "Security and Privacy", "Notifications"};
+        String[] listItemSubs = {"Edit your username", "Modify your tag line", "Security and Privacy settings", "Manage notification settings"};
+        Integer[] imageid = {R.drawable.logo_placeholder, R.drawable.logo_placeholder, R.drawable.logo_placeholder, R.drawable.logo_placeholder};
+
+        MyListAdapter listAdapter = new MyListAdapter(getActivity(), listItemHeads, listItemSubs, imageid);
+        optionsList = (ListView)rootView.findViewById(R.id.listSettings);
+        optionsList.setAdapter(listAdapter);
+
+        optionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                // TODO Auto-generated method stub
+                if(position == 0) {
+                    //code specific to first list item
+                    Toast.makeText(getActivity().getApplicationContext(),"Place Your First Option Code",Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 1) {
+                    //code specific to 2nd list item
+                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Second Option Code",Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 2) {
+                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Third Option Code",Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 3) {
+                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Forth Option Code",Toast.LENGTH_SHORT).show();
+                }
+                else if(position == 4) {
+                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Fifth Option Code",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -96,7 +136,7 @@ public class ProfileFragment extends Fragment {
                 openImage();
             }
         });
-        return view;
+        return rootView;
     }
 
     private void openImage() {

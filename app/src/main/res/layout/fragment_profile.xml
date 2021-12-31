@@ -14,12 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:textStyle="bold"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
@@ -42,19 +36,15 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="20dp"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="240dp"
-                />
-
             <ListView
+                android:layout_marginTop="240dp"
+                android:id="@+id/listSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="200dp">
-
-
+                android:layout_marginBottom="50dp">
             </ListView>
+
+
 
 
 
