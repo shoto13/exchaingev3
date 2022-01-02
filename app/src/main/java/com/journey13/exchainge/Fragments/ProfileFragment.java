@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +37,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.journey13.exchainge.MainActivity;
 import com.journey13.exchainge.Model.User;
 import com.journey13.exchainge.MyListAdapter;
 import com.journey13.exchainge.R;
+import com.journey13.exchainge.settingsChangeTagline;
+import com.journey13.exchainge.settingsChangeUsername;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -90,11 +88,13 @@ public class ProfileFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if(position == 0) {
                     //code specific to first list item
-                    Toast.makeText(getActivity().getApplicationContext(),"Place Your First Option Code",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), settingsChangeUsername.class);
+                    startActivity(intent);
                 }
                 else if(position == 1) {
                     //code specific to 2nd list item
-                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Second Option Code",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), settingsChangeTagline.class);
+                    startActivity(intent);
                 }
                 else if(position == 2) {
                     Toast.makeText(getActivity().getApplicationContext(),"Place Your Third Option Code",Toast.LENGTH_SHORT).show();
