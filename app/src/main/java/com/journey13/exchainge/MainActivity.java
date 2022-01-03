@@ -14,8 +14,11 @@ package com.journey13.exchainge;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -25,9 +28,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,17 +62,38 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
 
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar2;
+    private NavigationView nvDrawer;
+
+    private ActionBarDrawerToggle drawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //DRAWERS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("");
 
-        profilePic = findViewById(R.id.profile_image);
-        username = findViewById(R.id.username);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        // Setup drawer view
+        setupDrawerContent(nvDrawer);
+
+        //NAVIGATION VIEW MENU
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
+        TextView usernameText = headerLayout.findViewById(R.id.usernameTextView);
+
+
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("");
+//
+//        profilePic = findViewById(R.id.profile_image);
+//        username = findViewById(R.id.username);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(firebaseUser.getUid());
@@ -75,56 +101,15 @@ public class MainActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                usernameText.setText(user.getUsername());
+                if (user.getImageURL().equals("default")) {
 
-                if (firebaseUser != null) {
-                    User user = dataSnapshot.getValue(User.class);
-
-                    username.setText(user.getUsername());
-
-                    if (user.getImageURL().equals("default")) {
-                        profilePic.setImageResource(R.mipmap.ic_launcher);
-                    } else {
-                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        final TabLayout tabLayout = findViewById(R.id.tab_layout);
-        final ViewPager viewPager = findViewById(R.id.view_pager);
-
-        reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chats");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-                int unread = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isSeen()) {
-                        unread++;
-                    }
-                }
-
-                if (unread == 0) {
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+                    //TODO SET PROFILE IMAGE HERE
+                    //image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
-
+                   // Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
                 }
-
-                viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
-
-                viewPager.setAdapter(viewPagerAdapter);
-                tabLayout.setupWithViewPager(viewPager);
-
             }
 
             @Override
@@ -133,7 +118,142 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        if (navigationView.getHeaderCount() > 0) {
+            // avoid NPE by first checking if there is at least one Header View available
+            //View headerLayout = navigationView.getHeaderView(0);
+        }
+
+
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                if (firebaseUser != null) {
+//                    User user = dataSnapshot.getValue(User.class);
+//
+//                    username.setText(user.getUsername());
+//
+//                    if (user.getImageURL().equals("default")) {
+//                        profilePic.setImageResource(R.mipmap.ic_launcher);
+//                    } else {
+//                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+//        final TabLayout tabLayout = findViewById(R.id.tab_layout);
+
+
+//        final ViewPager viewPager = findViewById(R.id.view_pager);
+//
+//        reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chats");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+//                int unread = 0;
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Chat chat = snapshot.getValue(Chat.class);
+//                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isSeen()) {
+//                        unread++;
+//                    }
+//                }
+//
+//                if (unread == 0) {
+//                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+//                } else {
+//                    viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
+//
+//                }
+//
+//                viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+//                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+//
+////                viewPager.setAdapter(viewPagerAdapter);
+//                tabLayout.setupWithViewPager(viewPager);
+
+            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
     }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_first_fragment:
+                fragmentClass = ChatsFragment.class;
+                break;
+            case R.id.nav_second_fragment:
+                fragmentClass = UsersFragment.class;
+                break;
+            case R.id.nav_third_fragment:
+                fragmentClass = ProfileFragment.class;
+                break;
+            default:
+                fragmentClass = ChatsFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // The action bar home/up action should open or close the drawer.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+
+                startActivity(new Intent(MainActivity.this, init_landing.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,54 +262,43 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-
-                startActivity(new Intent(MainActivity.this, init_landing.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                return true;
-        }
-        return false;
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
-
-        ViewPagerAdapter(FragmentManager fm){
-            super(fm);
-            this.fragments = new ArrayList<>();
-            this.titles = new ArrayList<>();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            fragments.add(fragment);
-            titles.add(title);
-        }
-
-        //
 
 
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles.get(position);
-        }
-    }
+//    class ViewPagerAdapter extends FragmentPagerAdapter {
+//
+//        private ArrayList<Fragment> fragments;
+//        private ArrayList<String> titles;
+//
+//        ViewPagerAdapter(FragmentManager fm){
+//            super(fm);
+//            this.fragments = new ArrayList<>();
+//            this.titles = new ArrayList<>();
+//        }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            return fragments.get(position);
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return fragments.size();
+//        }
+//
+//        public void addFragment(Fragment fragment, String title) {
+//            fragments.add(fragment);
+//            titles.add(title);
+//        }
+//
+//        //
+//
+//
+//        @Nullable
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return titles.get(position);
+//        }
+//    }
 
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -218,5 +327,6 @@ public class MainActivity extends AppCompatActivity {
 //TODO:: SEE IF i CAN FIX THE GLIDE IMAGEVIEW
 //TODO:: UPDATE STYLE TO DARK STYLE
 //TODO:: UPDATE LOGIN AND SIGNUP PAGE TO BE THE SAME
-//TODO:: CREATE A TAB VIEWER AND SWITCH MENU STYLE OVER
+
+//TODO:: CREATE A TAB VIEWER AND SWITCH MENU STYLE OVER -- DONE, FIX (ADD BURGER ICON)
 //TODO:: CREATE FUNCTIONING SEARCH SYSTEM TO LOOK UP AND CONVERSE WITH USERS (SO ONLY THE RIGHT PEOPLE SHOW UP IN USERS)
