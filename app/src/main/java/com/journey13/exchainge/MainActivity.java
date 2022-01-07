@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     //TODO SET PROFILE IMAGE HERE
                     //image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                   // Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                    //Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
                 }
             }
 
@@ -118,11 +119,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         if (navigationView.getHeaderCount() > 0) {
             // avoid NPE by first checking if there is at least one Header View available
             //View headerLayout = navigationView.getHeaderView(0);
         }
+
+
+        //Set up hamburger icon in action bar for our drawer toggle
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.open_drawer_res, R.string.close_drawer_res)
+        {
+            public void onDrawerClosed(View view)
+            {
+                supportInvalidateOptionsMenu();
+                //drawerOpened = false;
+            }
+
+            public void onDrawerOpened(View drawerView)
+            {
+                supportInvalidateOptionsMenu();
+                //drawerOpened = true;
+            }
+        };
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
 
 
 //        reference.addValueEventListener(new ValueEventListener() {
@@ -189,6 +209,21 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //
 //    }
+
+    //Get ans sync state for hamburger icon in action bar
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
