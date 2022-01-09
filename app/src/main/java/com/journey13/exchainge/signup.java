@@ -53,6 +53,7 @@ public class signup extends AppCompatActivity {
                 String txt_password = passwordEditText.getText().toString();
                 String txt_firstName = firstNameEditText.getText().toString();
                 String txt_secondName = secondNameEditText.getText().toString();
+                String txt_tagline = "I'm now on Exchainge!";
 
                 //CHECK IF FIELDS ARE EMPTY (ADD ADDITIONAL FIELDS)
                 if(TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
@@ -60,7 +61,7 @@ public class signup extends AppCompatActivity {
                 } else if (txt_password.length() < 6) {
                     Toast.makeText(signup.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(txt_username, txt_email, txt_password, txt_firstName, txt_secondName);
+                    register(txt_username, txt_email, txt_password, txt_firstName, txt_secondName, txt_tagline);
                 }
             }
         });
@@ -68,7 +69,7 @@ public class signup extends AppCompatActivity {
     }
 
     //REGISTER A NEW USER USING FIREBASE
-    private void register(String username, String email, String password, String firstName, String secondName) {
+    private void register(String username, String email, String password, String firstName, String secondName, String tagline) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -83,6 +84,7 @@ public class signup extends AppCompatActivity {
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
                             hashMap.put("username", username);
+                            hashMap.put("tagline", tagline);
                             hashMap.put("imageURL", "default");
                             hashMap.put("firstName", firstName);
                             hashMap.put("secondName", secondName);

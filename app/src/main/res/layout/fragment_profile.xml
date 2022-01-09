@@ -27,14 +27,28 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
                 android:layout_below="@id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="2dp"
+                android:text="username"
                 android:textColor="@color/Papaya_IC"
-                android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_marginBottom="20dp"/>
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="20dp"
+                android:text="tag"
+                android:textColor="@color/Raspberry_IC"
+                android:textSize="14sp"
+                android:textStyle="italic" />
 
             <ListView
                 android:layout_marginTop="240dp"

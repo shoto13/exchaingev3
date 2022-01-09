@@ -51,7 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
 
     CircleImageView image_profile;
-    TextView username;
+    TextView username, tagline;
 
     DatabaseReference reference;
     FirebaseUser fuser;
@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
 
         image_profile = rootView.findViewById(R.id.profile_image);
         username = rootView.findViewById(R.id.username);
+        tagline = rootView.findViewById(R.id.tagline);
         //SETTINGS AND OPTIONS
 
         String[] listItemHeads = {"Username", "Tag line", "Security and Privacy", "Notifications"};
@@ -119,6 +120,7 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
+                tagline.setText(user.getTagline());
                 if (user.getImageURL().equals("default")) {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {

@@ -9,11 +9,13 @@ public class User {
     private String search;
     private String firstName;
     private String secondName;
+    private String tagline;
 
 
-    public User(String id, String username, String imageURL, String status, String search, String firstName, String secondName) {
+    public User(String id, String username, String tagline, String imageURL, String status, String search, String firstName, String secondName) {
         this.id = id;
         this.username = username;
+        this.tagline = tagline;
         this.imageURL = imageURL;
         this.status = status;
         this.search = search;
@@ -40,6 +42,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
     }
 
     public String getImageURL() {
