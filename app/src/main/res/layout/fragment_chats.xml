@@ -11,4 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <ImageView
+        android:id="@+id/noMessagesImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/baseline_chat_bubble_outline_white_48"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/noMessagesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing to see here..."
+        android:textColor="@color/Papaya_IC"
+        android:textSize="18sp"
+        android:layout_below="@id/noMessagesImage"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>

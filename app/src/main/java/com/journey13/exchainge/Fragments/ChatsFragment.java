@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +46,9 @@ public class ChatsFragment extends Fragment {
 
     private List<Chatlist> usersList;
 
+    private TextView noMessagesText;
+    private ImageView noMessagesImage;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +63,9 @@ public class ChatsFragment extends Fragment {
 
         usersList = new ArrayList<>();
 
+        noMessagesText = view.findViewById(R.id.noMessagesText);
+        noMessagesImage = view.findViewById(R.id.noMessagesImage);
+
         reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Chatlist").child(fuser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,7 +76,14 @@ public class ChatsFragment extends Fragment {
                     usersList.add(chatlist);
                 }
 
+                // set the default conversations background display to show there are no messages yet
+                if (usersList.isEmpty()) {
+                    noMessagesText.setVisibility(View.VISIBLE);
+                    noMessagesImage.setVisibility(View.VISIBLE);
+                }
+
                 chatList();
+
             }
 
             @Override
