@@ -77,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
         //DRAWERS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+
+        setInitialFragment();
 
         //NAVIGATION VIEW MENU
         NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
@@ -271,6 +272,29 @@ public class MainActivity extends AppCompatActivity {
         // Close the navigation drawer
         mDrawer.closeDrawers();
     }
+
+
+
+    // SETS UP INITIAL FRAGMENT TO CONVERSATIONS FRAGMENT TODO:: CHECK IF THIS IS ACTUALLY A GOOD WAY OF MANAGING INITIAL FRAGMENT LAUNCHING (IT PROBABLY ISNT)
+    public void setInitialFragment () {
+
+        Fragment fragment = null;
+        Class fragmentClass;
+
+        fragmentClass = ChatsFragment.class;
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
