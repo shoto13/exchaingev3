@@ -26,13 +26,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +51,8 @@ import com.journey13.exchainge.Fragments.ProfileFragment;
 import com.journey13.exchainge.Fragments.UsersFragment;
 import com.journey13.exchainge.Model.Chat;
 import com.journey13.exchainge.Model.User;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,12 +95,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
         View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header);
         TextView usernameText = headerLayout.findViewById(R.id.usernameTextView);
+        ImageView profilePic = headerLayout.findViewById(R.id.navProfileImage);
+        TextView taglineText = headerLayout.findViewById(R.id.taglineTextView);
 
 
-//        Objects.requireNonNull(getSupportActionBar()).setTitle("");
-//
-//        profilePic = findViewById(R.id.profile_image);
-//        username = findViewById(R.id.username);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(firebaseUser.getUid());
@@ -105,12 +108,23 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 usernameText.setText(user.getUsername());
+                taglineText.setText(user.getTagline());
+
+                String imgUrl = user.getImageURL();
+
+                //Load profile image into navigation drawer
                 if (user.getImageURL().equals("default")) {
 
-                    //TODO SET PROFILE IMAGE HERE
-                    //image_profile.setImageResource(R.mipmap.ic_launcher);
+                    Glide.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(profilePic);
+
                 } else {
-                    //Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                    //Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
+                    Glide.with(getApplicationContext())
+                            .load(imgUrl)
+                            .apply(new RequestOptions()
+                                    .placeholder(R.mipmap.ic_launcher)
+                                    .fitCenter())
+                            .into(profilePic);
                 }
             }
 
