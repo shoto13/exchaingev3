@@ -44,6 +44,7 @@ import com.journey13.exchainge.settingsChangeTagline;
 import com.journey13.exchainge.settingsChangeUsername;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -119,12 +120,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
+                assert user != null;
                 username.setText(user.getUsername());
                 tagline.setText(user.getTagline());
+
                 if (user.getImageURL().equals("default")) {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
                 }
             }
 

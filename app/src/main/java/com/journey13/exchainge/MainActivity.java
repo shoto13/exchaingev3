@@ -114,17 +114,23 @@ public class MainActivity extends AppCompatActivity {
 
                 //Load profile image into navigation drawer
                 if (user.getImageURL().equals("default")) {
-
+                    System.out.println("WE ARE IN THIS CLAUSE RIGHT NOW THIS IS NOT SO GOOD ");
                     Glide.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(profilePic);
 
                 } else {
-                    //Glide.with(getApplicationContext()).load(user.getImageURL()).into(profilePic);
+
                     Glide.with(getApplicationContext())
-                            .load(imgUrl)
+                            .load(user.getImageURL())
                             .apply(new RequestOptions()
-                                    .placeholder(R.mipmap.ic_launcher)
+                                    .placeholder(R.drawable.andromeda_galaxy)
                                     .fitCenter())
                             .into(profilePic);
+
+                    System.out.println("WE ARE IN THAT OTHER CLAUSE RIGHT NOW THIS IS GOOD");
+//                    Glide.with(getApplicationContext())
+//                            .load(user.getImageURL())
+//                            .placeholder(R.drawable.logo_placeholder)
+//                            .into(profilePic);
                 }
             }
 
@@ -138,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
             // avoid NPE by first checking if there is at least one Header View available
             //View headerLayout = navigationView.getHeaderView(0);
         }
-
 
         //Set up hamburger icon in action bar for our drawer toggle
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.open_drawer_res, R.string.close_drawer_res)
