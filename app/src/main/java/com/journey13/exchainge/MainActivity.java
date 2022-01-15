@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
 
+                    System.out.println("THE USER PROFILE IMAGE URL IS::::::: " + user.getImageURL());
+
                     Glide.with(getApplicationContext())
                             .load(user.getImageURL())
                             .apply(new RequestOptions()
