@@ -70,7 +70,6 @@ public class settingsChangeTagline extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getApplicationContext(), "Tagline failed to update. Please try again later", Toast.LENGTH_SHORT).show();
-
             }
         });
     }

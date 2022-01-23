@@ -47,7 +47,7 @@ import retrofit2.Callback;
 public class MessageActivity extends AppCompatActivity {
 
     private CircleImageView profile_image;
-    private TextView username;
+    private TextView username, tagline;
 
     private  FirebaseUser fuser;
     private DatabaseReference reference;
@@ -95,6 +95,7 @@ public class MessageActivity extends AppCompatActivity {
 
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
+        tagline = findViewById(R.id.taglineText);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
 
@@ -118,11 +119,13 @@ public class MessageActivity extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance("https://exchainge-db047-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(userid);
 
+        //SET USERNAME, TAGLINE, PROFILE PICTURE IN MESSAGE SCREEN
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
+                tagline.setText(user.getTagline());
                 if (user.getImageURL().equals("default")) {
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
