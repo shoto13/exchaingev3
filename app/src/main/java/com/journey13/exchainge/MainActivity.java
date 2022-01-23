@@ -114,12 +114,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //Load profile image into navigation drawer
                 if (user.getImageURL().equals("default")) {
-                    System.out.println("WE ARE IN THIS CLAUSE RIGHT NOW THIS IS NOT SO GOOD ");
                     Glide.with(getApplicationContext()).load(R.mipmap.ic_launcher).into(profilePic);
 
                 } else {
-
-                    System.out.println("THE USER PROFILE IMAGE URL IS::::::: " + user.getImageURL());
 
                     Glide.with(getApplicationContext())
                             .load(user.getImageURL())
@@ -128,11 +125,6 @@ public class MainActivity extends AppCompatActivity {
                                     .fitCenter())
                             .into(profilePic);
 
-                    System.out.println("WE ARE IN THAT OTHER CLAUSE RIGHT NOW THIS IS GOOD");
-//                    Glide.with(getApplicationContext())
-//                            .load(user.getImageURL())
-//                            .placeholder(R.drawable.logo_placeholder)
-//                            .into(profilePic);
                 }
             }
 

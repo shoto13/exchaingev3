@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -127,7 +128,16 @@ public class ProfileFragment extends Fragment {
                 if (user.getImageURL().equals("default")) {
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 } else {
-                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(image_profile);
+                    //CHECK IF THE ACTIVITY IS NULL FIRST (E.G. USER SIGNED OUT) TO AVOID NPE
+                    if (getActivity() == null) {
+                        return;
+                    }
+                    Glide.with(getContext())
+                            .load(user.getImageURL())
+                            .apply(new RequestOptions()
+                                    .placeholder(R.drawable.andromeda_galaxy)
+                                    .fitCenter())
+                            .into(image_profile);
                 }
             }
 
