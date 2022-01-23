@@ -49,6 +49,7 @@ import com.google.protobuf.Value;
 import com.journey13.exchainge.Fragments.ChatsFragment;
 import com.journey13.exchainge.Fragments.ProfileFragment;
 import com.journey13.exchainge.Fragments.UsersFragment;
+import com.journey13.exchainge.Fragments.WalletFragment;
 import com.journey13.exchainge.Model.Chat;
 import com.journey13.exchainge.Model.User;
 
@@ -264,6 +265,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_third_fragment:
                 fragmentClass = ProfileFragment.class;
                 break;
+            case R.id.nav_wallet:
+                fragmentClass = WalletFragment.class;
             default:
                 fragmentClass = ChatsFragment.class;
         }
