@@ -77,7 +77,7 @@ public class ProfileFragment extends Fragment {
 
         String[] listItemHeads = {"Username", "Tag line", "Security and Privacy", "Notifications"};
         String[] listItemSubs = {"Edit your username", "Modify your tag line", "Security and Privacy settings", "Manage notification settings"};
-        Integer[] imageid = {R.drawable.logo_placeholder, R.drawable.logo_placeholder, R.drawable.logo_placeholder, R.drawable.logo_placeholder};
+        Integer[] imageid = {R.drawable.ic_baseline_person_24, R.drawable.ic_baseline_insert_emoticon_24, R.drawable.ic_baseline_security_24, R.drawable.ic_baseline_notifications_24};
 
         MyListAdapter listAdapter = new MyListAdapter(getActivity(), listItemHeads, listItemSubs, imageid);
         optionsList = (ListView)rootView.findViewById(R.id.listSettings);
