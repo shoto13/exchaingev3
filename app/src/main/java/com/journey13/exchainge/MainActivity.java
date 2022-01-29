@@ -267,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_wallet:
                 fragmentClass = WalletFragment.class;
+                break;
             default:
                 fragmentClass = ChatsFragment.class;
         }

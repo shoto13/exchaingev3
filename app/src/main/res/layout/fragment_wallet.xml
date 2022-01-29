@@ -5,10 +5,127 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.WalletFragment">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/getBalanceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Get balance update" />
+
+
+            <TextView
+                android:id="@+id/monthlyHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/getBalanceButton"
+                android:layout_marginTop="80dp"
+                android:layout_marginLeft="20dp"
+                android:text="Monthly earnings"
+                android:textColor="@color/Raspberry_IC"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/monthlyFundsDollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/monthlyHeader"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="$***"
+                android:textColor="@color/Papaya_IC"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/monthlyFundsEXCH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/monthlyFundsDollar"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="***EXCH"
+                android:textColor="@color/Papaya_IC"
+                android:textSize="20sp"
+                android:textStyle="italic"/>
+
+
+            <TextView
+                android:id="@+id/balanceHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/getBalanceButton"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="80dp"
+                android:layout_marginRight="20dp"
+                android:text="Your balance"
+                android:textColor="@color/Raspberry_IC"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/balanceDollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/balanceHeader"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="$***"
+                android:textColor="@color/Papaya_IC"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/balanceEXCH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/balanceDollar"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="***EXCH"
+                android:textColor="@color/Papaya_IC"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+
+
+            <ListView
+                android:layout_marginTop="240dp"
+                android:id="@+id/listSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp">
+            </ListView>
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="100dp"
+        android:textSize="28sp"
+        android:text="Wallet Fragment" />
 
 </FrameLayout>
