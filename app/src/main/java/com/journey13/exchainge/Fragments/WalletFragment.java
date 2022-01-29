@@ -54,7 +54,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class WalletFragment extends Fragment {
 
     private Button updateBalanceButton;
-    private TextView monthlyFundsDollar, MonthlyFundsEXCH, balanceDollar, balanceEXCH;
+    private TextView monthlyFundsDollar, monthlyFundsEXCH, balanceDollar, balanceEXCH;
 
 
     @Override
@@ -62,7 +62,24 @@ public class WalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_wallet, container, false);
-        
+
+        updateBalanceButton = rootView.findViewById(R.id.getBalanceButton);
+
+        monthlyFundsDollar = rootView.findViewById(R.id.monthlyFundsDollar);
+        monthlyFundsEXCH = rootView.findViewById(R.id.monthlyFundsEXCH);
+        balanceDollar = rootView.findViewById(R.id.balanceDollar);
+        balanceEXCH = rootView.findViewById(R.id.balanceEXCH);
+
+        updateBalanceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO update hard coded values used for testing
+                monthlyFundsDollar.setText("$2.77");
+                monthlyFundsEXCH.setText("247.88 EXCH");
+                balanceDollar.setText("$12.88");
+                balanceEXCH.setText("1120 EXCH");
+            }
+        });
 
 
         return rootView;
