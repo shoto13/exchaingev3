@@ -84,7 +84,6 @@ public class ProfileFragment extends Fragment {
         optionsList = (ListView)rootView.findViewById(R.id.listSettings);
         optionsList.setAdapter(listAdapter);
 
-        //come one
 
         optionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
