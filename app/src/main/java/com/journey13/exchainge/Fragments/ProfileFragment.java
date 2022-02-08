@@ -41,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import com.journey13.exchainge.Model.User;
 import com.journey13.exchainge.MyListAdapter;
 import com.journey13.exchainge.R;
+import com.journey13.exchainge.settingsChangePrivacy;
 import com.journey13.exchainge.settingsChangeTagline;
 import com.journey13.exchainge.settingsChangeUsername;
 
@@ -100,7 +101,8 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent);
                 }
                 else if(position == 2) {
-                    Toast.makeText(getActivity().getApplicationContext(),"Place Your Third Option Code",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), settingsChangePrivacy.class);
+                    startActivity(intent);
                 }
                 else if(position == 3) {
                     Toast.makeText(getActivity().getApplicationContext(),"Place Your Forth Option Code",Toast.LENGTH_SHORT).show();
