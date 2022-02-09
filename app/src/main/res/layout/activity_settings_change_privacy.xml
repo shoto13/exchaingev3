@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Security"
-            android:textColor="@color/greenthree"
+            android:textColor="@color/Raspberry_IC"
             android:textSize="20sp" />
 
         <ListView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Privacy"
-            android:textColor="@color/greenthree"
+            android:textColor="@color/Raspberry_IC"
             android:textSize="20sp" />
 
         <ListView
